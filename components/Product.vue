@@ -40,7 +40,7 @@ defineProps<{
 
 <style scoped>
 .title {
-    font-size: 1.5em;
+    font-size: 1.2em;
 }
 
 .actions {
@@ -49,11 +49,11 @@ defineProps<{
     display: flex;
     justify-content: space-between;
     border-radius: 1em;
-    padding: 1em 2em;
+    padding: 1em 1.5em;
 }
 
 .description {
-    font-size: 1.2em;
+    font-size: 1em;
 }
 
 .stock {
@@ -67,31 +67,10 @@ defineProps<{
         border-radius: 1em;
         width: 400px;
         height: 400px;
+        max-height: 40vh;
         object-fit: contain;
     }
 }
-
-/* .gallery {
-    display: flex;
-    overflow-y: hidden;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    height: 40vh;
-    position: relative;
-    margin-top: -20px;
-
-    &::-webkit-scrollbar {
-        display: none;
-    }
-
-    img {
-        scroll-snap-align: center;
-        width: max-content;
-        height: 100%;
-        min-width: 100%;
-        object-fit: contain;
-    }
-} */
 
 .radios {
     display: flex;
@@ -126,7 +105,7 @@ defineProps<{
     background-color: white;
     border: none;
     border-radius: 100px;
-    padding: 1em;
+    padding: .7em 1em;
     cursor: pointer;
 }
 </style>

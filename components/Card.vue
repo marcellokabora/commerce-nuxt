@@ -31,7 +31,7 @@ function openModal() {
                 </div>
             </div>
         </div>
-        <button class="favorite" :class="{ active: product.id }">
+        <button class="favorite" :class="{ active: product.active }">
             <Icon name="material-symbols:favorite" />
         </button>
     </div>
@@ -47,10 +47,10 @@ function openModal() {
     position: relative;
     transition: all 0.2s;
     cursor: pointer;
-    box-shadow: 0px 0px 0px 0.2em rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 0px 0.2em rgba(255, 255, 255, 0.2);
 
     &:hover {
-        box-shadow: 0px 0px 0px 0.4em rgba(0, 0, 0, 0.5);
+        box-shadow: 0px 0px 0px 0.4em rgba(255, 255, 255, 0.4);
         /* transform: scale(1.1);
         z-index: 1; */
     }
@@ -73,7 +73,7 @@ function openModal() {
 
         img {
             width: auto;
-            height: 200px;
+            height: 150px;
             transition: all 0.5s;
             object-fit: contain;
         }

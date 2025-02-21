@@ -8,6 +8,7 @@ export interface Product {
   description: string;
   images: string[];
   favorite: boolean;
+  active: boolean;
 }
 
 export interface Data {
