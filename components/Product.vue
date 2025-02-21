@@ -18,8 +18,9 @@ defineProps<{
                 </template>
                 <div class="description">{{ product.description }}</div>
                 <div class="stock">Stock {{ product.stock }}</div>
-                <UCarousel v-slot="{ item }" dots :items="product.images" class="gallery w-full max-w-xs mx-auto">
-                    <img :src="item">
+                <UCarousel v-slot="{ item }" :arrows="product.images.length > 1" :items="product.images"
+                    class="gallery w-full max-w-xs mx-auto">
+                    <NuxtImg width="400px" height="400px" :src="item" />
                 </UCarousel>
                 <template #footer>
                     <div class="actions">
@@ -61,8 +62,6 @@ defineProps<{
 }
 
 .gallery {
-    margin-bottom: 20px;
-
     img {
         border-radius: 1em;
         width: 400px;

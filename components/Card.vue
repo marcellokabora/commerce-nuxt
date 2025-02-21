@@ -18,7 +18,7 @@ function openModal() {
 <template>
     <div class="product">
         <div class="container" @click="openModal">
-            <img :src="product.thumbnail" alt={{product.id}} />
+            <NuxtImg :src="product.thumbnail" alt={{product.id}} />
             <div class="title">{{ product.title }}</div>
             <div class="data">
                 <div class="info">

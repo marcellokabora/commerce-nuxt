@@ -18,9 +18,11 @@ if (categories) {
 <template>
     <nav>
         <div class="asidel">
-            <img src="/logo.svg" alt="" />
+            <div class="logo">
+                <img src="/nuxt.svg" alt="" />
+            </div>
             <div class="menus">
-                <NuxtLink to="/" class="active">Products</NuxtLink>
+                <NuxtLink to="/">Products</NuxtLink>
                 <NuxtLink to="/favorite">Favorites</NuxtLink>
             </div>
         </div>
@@ -53,9 +55,15 @@ nav {
     flex-wrap: wrap;
     gap: 2em;
 
-    img {
-        height: 30px;
-        padding: 0;
+    .logo {
+        width: 50px;
+        display: flex;
+        align-items: center;
+
+        img {
+            position: absolute;
+            height: 60px;
+        }
     }
 
     a {
@@ -69,7 +77,7 @@ nav {
             color: var(--color-primary);
         }
 
-        &.active {
+        &.router-link-active {
             background-color: var(--color-primary);
             color: white;
         }
