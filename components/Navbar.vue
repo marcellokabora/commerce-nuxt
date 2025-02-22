@@ -1,16 +1,35 @@
 <script setup lang="ts">
-import type { Categories } from '~/types/types';
+import type { Categories } from '~/types/types'
 
 const categories = await $fetch<Categories[]>('https://dummyjson.com/products/categories')
 
 const items = ref()
-const value = ref("Category")
+const category = ref("Category")
+const topone = categories.filter(value => ["laptops", "vehicle", "fragrances"].includes(value.slug))
+let search = ref("")
 
 if (categories) {
     items.value = [
         "Category",
         ...categories.map(value => value.name)
     ]
+}
+
+function onChange() {
+    navigateTo({
+        path: '/category/' + categories.find(value => value.name === category.value).slug
+    }
+    )
+}
+function onSearch(event) {
+    event.preventDefault()
+    if (search.value) {
+
+        navigateTo('/search/' + search.value)
+    } else {
+        navigateTo("/")
+
+    }
 }
 
 </script>
@@ -23,13 +42,19 @@ if (categories) {
             </div>
             <div class="menus">
                 <NuxtLink to="/">Products</NuxtLink>
-                <NuxtLink to="/favorite">Favorites</NuxtLink>
+                <NuxtLink v-for="menu in topone" :to="'/category/' + menu.slug">{{ menu.name }}</NuxtLink>
             </div>
         </div>
-        <form class="asider" v-if="categories">
-            <USelectMenu v-model="value" :items="items" class="w-48" />
-            <UButton icon="material-symbols:shop-rounded" size="lg" color="primary" rounded />
-        </form>
+        <div class="asider" v-if="categories">
+            <USelectMenu v-model="category" :items="items" class="w-48" @change="onChange" />
+            <form @submit="onSearch">
+                <UInput v-model="search" color="primary" variant="outline" placeholder="Search..." />
+            </form>
+
+            <UChip :text="0" size="3xl">
+                <UButton icon="material-symbols:shop-rounded" size="xl" class="font-bold rounded-full cursor-pointer" />
+            </UChip>
+        </div>
     </nav>
 </template>
 
@@ -74,11 +99,11 @@ nav {
         font-size: bold;
 
         &:hover {
-            color: var(--color-primary);
+            color: var(--ui-primary);
         }
 
         &.router-link-active {
-            background-color: var(--color-primary);
+            background-color: var(--ui-primary);
             color: white;
         }
     }
@@ -88,6 +113,12 @@ nav {
     display: flex;
     align-items: center;
     gap: 1em;
+
+    .shop {
+        border-radius: 100px;
+        display: none;
+        cursor: pointer;
+    }
 }
 
 @media (max-width: 500px) {

@@ -9,9 +9,10 @@ export interface Product {
   images: string[];
   favorite: boolean;
   active: boolean;
+  category: string;
 }
 
-export interface Data {
+export interface ProductsData {
   products: Product[];
   limit: number;
   total: number;

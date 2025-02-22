@@ -40,7 +40,7 @@ defineProps<{
 }
 
 .actions {
-    background-color: var(--color-primary);
+    background-color: var(--ui-primary);
     color: white;
     display: flex;
     justify-content: space-between;
@@ -76,7 +76,7 @@ defineProps<{
         cursor: pointer;
         opacity: 0.6;
         zoom: 0.7;
-        color: var(--color-primary);
+        color: var(--ui-primary);
     }
 }
 
@@ -95,7 +95,7 @@ defineProps<{
     display: flex;
     align-items: center;
     gap: 0.5em;
-    color: var(--color-primary);
+    color: var(--ui-primary);
     background-color: white;
     border: none;
     border-radius: 100px;

@@ -3,7 +3,13 @@
 @import "@nuxt/ui";
 
 :root {
-    --color-primary: #00ba6d;
+    --ui-primary: #00ba6d;
+    --ui-secondary: #008a51;
+    --ui-success: var(--ui-color-success-500);
+    --ui-info: var(--ui-color-info-500);
+    --ui-warning: var(--ui-color-warning-500);
+    --ui-error: var(--ui-color-error-500);
+
     --color-secondary: #008a51;
 }
 
@@ -38,4 +44,12 @@ body {
     font-optical-sizing: auto;
     font-style: normal;
     font-variation-settings: "wdth" 100;
+}
+
+.nodata {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    font-size: 2em;
 }

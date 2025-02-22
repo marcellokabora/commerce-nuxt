@@ -12,7 +12,7 @@ function addCart() {
 <template>
     <div class="product">
         <div class="container">
-            <NuxtLink :to="'product/' + product.id">
+            <NuxtLink :to="'/product/' + product.id">
                 <NuxtImg :src="product.thumbnail" alt={{product.id}} />
                 <div class="title">{{ product.title }}</div>
             </NuxtLink>
@@ -28,7 +28,6 @@ function addCart() {
             <button class="favorite" :class="{ active: product.active }" title="Favorite">
                 <Icon name="material-symbols:favorite" />
             </button>
-
             <UModal>
                 <button class="favorite" :class="{ active: product.active }" title="Preview">
                     <Icon name="material-symbols:visibility" />
@@ -84,7 +83,7 @@ function addCart() {
         align-items: center;
         justify-content: center;
         gap: 1em;
-        background-color: var(--color-primary);
+        background-color: var(--ui-primary);
         width: 100%;
         border-radius: 1em;
         padding: 1em;
@@ -128,12 +127,12 @@ function addCart() {
         }
 
         &.active {
-            background-color: var(--color-primary);
+            background-color: var(--ui-primary);
             color: white;
         }
 
         &:hover:not(.active) {
-            color: var(--color-primary);
+            color: var(--ui-primary);
         }
     }
 }
