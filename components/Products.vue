@@ -16,10 +16,8 @@ const { products } = defineProps<{ products: Product[] }>()
 <style scoped>
 section.products {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 1em;
     padding: 2em;
-    background-color: var(--ui-primary);
-    min-height: 100vh;
 }
 </style>

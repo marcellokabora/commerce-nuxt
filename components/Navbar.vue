@@ -72,6 +72,7 @@ nav {
     background-color: white;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
     z-index: 1;
+    overflow: hidden;
 }
 
 .asidel {
@@ -89,6 +90,12 @@ nav {
             position: absolute;
             height: 60px;
         }
+    }
+
+    .menus {
+        display: flex;
+        overflow: hidden;
+        flex: 1;
     }
 
     a {
@@ -121,11 +128,11 @@ nav {
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 1000px) {
     nav {
-        position: relative;
+        /* position: relative;
         align-items: center;
-        flex-direction: column;
+        flex-direction: column; */
     }
 
     .asidel {
@@ -136,6 +143,10 @@ nav {
                 position: relative;
             }
         }
+    }
+
+    .asider {
+        display: none;
     }
 
 }

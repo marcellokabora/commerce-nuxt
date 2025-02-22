@@ -17,8 +17,6 @@ const { data } = await useFetch<any>('https://dummyjson.com/product/' + id)
 
 <style scoped>
 .main {
-    background-color: var(--ui-primary);
-    min-height: 100vh;
     display: flex;
 }
 
