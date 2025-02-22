@@ -1,34 +1,30 @@
 <script setup lang="ts">
-import type { Categories } from '~/types/types'
+import type { Categories, Product } from '~/types/types'
 
 const categories = await $fetch<Categories[]>('https://dummyjson.com/products/categories')
 
 const items = ref()
-const category = ref("Category")
-const topone = categories.filter(value => ["laptops", "vehicle", "fragrances"].includes(value.slug))
+const category = ref()
+// const topone = categories.filter(value => ["laptops", "vehicle", "fragrances"].includes(value.slug))
 let search = ref("")
+const cart = cartCookie().products
 
 if (categories) {
     items.value = [
-        "Category",
         ...categories.map(value => value.name)
     ]
 }
 
 function onChange() {
-    navigateTo({
-        path: '/category/' + categories.find(value => value.name === category.value).slug
-    }
-    )
+    navigateTo('/category/' + categories.find(value => value.name === category.value)?.slug)
 }
-function onSearch(event) {
+
+function onSearch(event: any) {
     event.preventDefault()
     if (search.value) {
-
         navigateTo('/search/' + search.value)
     } else {
         navigateTo("/")
-
     }
 }
 
@@ -42,16 +38,16 @@ function onSearch(event) {
             </div>
             <div class="menus">
                 <NuxtLink to="/">Products</NuxtLink>
-                <NuxtLink v-for="menu in topone" :to="'/category/' + menu.slug">{{ menu.name }}</NuxtLink>
+                <NuxtLink to="/favorites">Favorites</NuxtLink>
+                <!-- <NuxtLink v-for="menu in topone" :to="'/category/' + menu.slug">{{ menu.name }}</NuxtLink> -->
             </div>
         </div>
         <div class="asider" v-if="categories">
-            <USelectMenu v-model="category" :items="items" class="w-48" @change="onChange" />
+            <USelectMenu v-model="category" :items="items" class="w-48" placeholder="Categories" @change="onChange" />
             <form @submit="onSearch">
                 <UInput v-model="search" color="primary" variant="outline" placeholder="Search..." />
             </form>
-
-            <UChip :text="0" size="3xl">
+            <UChip :text="cart?.length" size="3xl" :show="cart.length > 0">
                 <UButton icon="material-symbols:shop-rounded" size="xl" class="font-bold rounded-full cursor-pointer" />
             </UChip>
         </div>
@@ -146,7 +142,7 @@ nav {
     }
 
     .asider {
-        display: none;
+        /* display: none; */
     }
 
 }

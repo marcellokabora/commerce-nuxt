@@ -4,8 +4,19 @@ import type { Product } from '~/types/types';
 const { product } = defineProps<{ product: Product }>()
 
 function addCart() {
-    console.log(product);
+    cartCookie().set(product.id)
 }
+
+function onFavorite() {
+    if (favoriteCookie().products.value.includes(product.id)) {
+        product.favorite = false
+        favoriteCookie().remove(product.id)
+    } else {
+        product.favorite = true
+        favoriteCookie().set(product.id)
+    }
+}
+
 
 </script>
 
@@ -25,11 +36,11 @@ function addCart() {
             </div>
         </div>
         <div class="actions">
-            <button class="favorite" :class="{ active: product.active }" title="Favorite">
+            <button class="favorite" :class="{ active: product.favorite }" title="Favorite" @click="onFavorite">
                 <Icon name="material-symbols:favorite" />
             </button>
             <UModal>
-                <button class="favorite" :class="{ active: product.active }" title="Preview">
+                <button class="favorite" title="Preview">
                     <Icon name="material-symbols:visibility" />
                 </button>
                 <template #content>
