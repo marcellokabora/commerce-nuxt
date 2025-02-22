@@ -4,11 +4,11 @@ import type { Categories } from '~/types/types';
 const categories = await $fetch<Categories[]>('https://dummyjson.com/products/categories')
 
 const items = ref()
-const value = ref("All")
+const value = ref("Category")
 
 if (categories) {
     items.value = [
-        "All",
+        "Category",
         ...categories.map(value => value.name)
     ]
 }
@@ -27,8 +27,8 @@ if (categories) {
             </div>
         </div>
         <form class="asider" v-if="categories">
-            <div class="label">Filter</div>
             <USelectMenu v-model="value" :items="items" class="w-48" />
+            <UButton icon="material-symbols:shop-rounded" size="lg" color="primary" rounded />
         </form>
     </nav>
 </template>
@@ -100,15 +100,10 @@ nav {
     .asidel {
         justify-content: center;
 
-        img {
-            width: 100%;
-            margin: 0;
-        }
-    }
-
-    .asider {
-        .label {
-            display: none;
+        .logo {
+            img {
+                position: relative;
+            }
         }
     }
 

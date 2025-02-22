@@ -10,33 +10,28 @@ defineProps<{
 </script>
 
 <template>
-    <UModal :title="product.title" :description="product.description">
-        <template #content>
-            <UCard>
-                <template #header>
-                    <h3 class="title">{{ product.title }}</h3>
-                </template>
-                <div class="description">{{ product.description }}</div>
-                <div class="stock">Stock {{ product.stock }}</div>
-                <UCarousel v-slot="{ item }" :arrows="product.images.length > 1" :items="product.images"
-                    class="gallery w-full max-w-xs mx-auto">
-                    <NuxtImg width="400px" height="400px" :src="item" />
-                </UCarousel>
-                <template #footer>
-                    <div class="actions">
-                        <span class="price">Price {{ product.price }}
-                            <Icon name="material-symbols:euro" />
-                        </span>
-                        <button class="favorite" @click="modal.close()">
-                            <Icon name="material-symbols:favorite" />
-                            <span>{{ product.favorite ? "Remove" : "Add" }}</span>
-                        </button>
-                    </div>
-                </template>
-            </UCard>
+    <UCard>
+        <template #header>
+            <h3 class="title">{{ product.title }}</h3>
         </template>
-
-    </UModal>
+        <div class="description">{{ product.description }}</div>
+        <div class="stock">Stock {{ product.stock }}</div>
+        <UCarousel v-slot="{ item }" :arrows="product.images.length > 1" :items="product.images"
+            class="gallery w-full max-w-xs mx-auto">
+            <NuxtImg width="400px" height="400px" :src="item" />
+        </UCarousel>
+        <template #footer>
+            <div class="actions">
+                <span class="price">Buy {{ product.price }}
+                    <Icon name="material-symbols:euro" />
+                </span>
+                <button class="favorite" @click="modal.close()">
+                    <Icon name="material-symbols:favorite" />
+                    <span>{{ product.favorite ? "Remove" : "Add" }}</span>
+                </button>
+            </div>
+        </template>
+    </UCard>
 </template>
 
 <style scoped>
