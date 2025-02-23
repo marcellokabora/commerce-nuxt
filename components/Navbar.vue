@@ -37,7 +37,7 @@ function onSearch(event: any) {
                 <img src="/nuxt.svg" alt="" />
             </div>
             <div class="menus">
-                <NuxtLink to="/">Products</NuxtLink>
+                <NuxtLink to="/products">Products</NuxtLink>
                 <NuxtLink to="/favorites">Favorites</NuxtLink>
             </div>
         </div>

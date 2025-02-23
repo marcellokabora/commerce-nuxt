@@ -5,8 +5,6 @@ const { product, removable } = defineProps<{ product: Product, removable?: boole
 
 let visible = ref(true);
 const path: string = useRoute().name?.toString()!
-console.log(path);
-
 
 function addCart() {
     const cart: Product = {
