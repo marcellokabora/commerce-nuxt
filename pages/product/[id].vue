@@ -5,23 +5,23 @@ const { data } = await useFetch<any>('https://dummyjson.com/product/' + id)
 </script>
 
 <template>
-    <div v-if="data == null">
-        No Product
-    </div>
-    <div v-else class="main">
-        <section>
-            <Product :product="data" />
-        </section>
-    </div>
+    <section>
+        <div v-if="data" class="container">
+            <ProductMain :product="data" />
+        </div>
+        <div v-else class="nodata">No Data</div>
+    </section>
 </template>
 
 <style scoped>
-.main {
-    display: flex;
-}
-
 section {
-    max-width: 800px;
     margin: auto;
+    background-color: white;
+    min-height: 100vh;
+
+    .container {
+        max-width: 800px;
+        margin: auto;
+    }
 }
 </style>

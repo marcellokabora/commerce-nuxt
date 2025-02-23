@@ -74,7 +74,7 @@ function onRemove() {
                         <Icon name="material-symbols:visibility" />
                     </button>
                     <template #content>
-                        <Product :product="product" />
+                        <ProductView :product="product" />
                     </template>
                 </UModal>
             </div>

@@ -6,17 +6,17 @@ const modal = useModal()
 const { product } = defineProps<{ product: Product }>()
 
 function onFavorite() {
-    if (favoriteCookie().products.value.includes(product.id)) {
+    if (favoriteCookie().products.value.includes(product)) {
         product.favorite = false
-        favoriteCookie().remove(product.id)
+        favoriteCookie().remove(product)
     } else {
         product.favorite = true
-        favoriteCookie().set(product.id)
+        favoriteCookie().set(product)
     }
 }
 
 function addCart() {
-    cartCookie().set(product.id)
+    cartCookie().set(product)
 }
 
 </script>
@@ -25,7 +25,7 @@ function addCart() {
     <div class="modal">
         <h3 class="title">{{ product.title }}</h3>
         <div class="description">{{ product.description }}</div>
-        <UCarousel v-slot="{ item }" :arrows="product.images.length > 1" :items="product.images"
+        <UCarousel v-if="product.images" v-slot="{ item }" :arrows="product.images.length > 1" :items="product.images"
             class="gallery w-full max-w-xs mx-auto">
             <NuxtImg width="400px" height="400px" :src="item" />
         </UCarousel>
@@ -55,16 +55,6 @@ function addCart() {
 
 .description {
     font-size: 1em;
-}
-
-.gallery {
-    img {
-        border-radius: 1em;
-        width: 400px;
-        height: 400px;
-        max-height: 40vh;
-        object-fit: contain;
-    }
 }
 
 .actions {
