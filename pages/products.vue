@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { ProductsData } from '~/types/types';
 
-const { data } = await useFetch<ProductsData>('https:dummyjson.com/products')
+const { data } = await useFetch<ProductsData>('https://dummyjson.com/products')
 </script>
 
 <template>
