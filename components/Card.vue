@@ -70,7 +70,7 @@ function onRemove() {
                     <Icon name="material-symbols:favorite" />
                 </button>
                 <UModal>
-                    <button class="favorite" title="Preview">
+                    <button class="favorite preview" title="Preview">
                         <Icon name="material-symbols:visibility" />
                     </button>
                     <template #content>
@@ -114,6 +114,7 @@ function onRemove() {
         img {
             width: auto;
             height: 150px;
+            margin: auto;
             transition: all 0.5s;
             object-fit: contain;
         }
@@ -178,6 +179,12 @@ function onRemove() {
 
         &:hover:not(.active) {
             color: var(--ui-primary);
+        }
+    }
+
+    @media (width<1000px) {
+        .preview {
+            display: none;
         }
     }
 }

@@ -27,9 +27,8 @@ function addCart() {
     <div class="modal">
         <h3 class="title">{{ product.title }}</h3>
         <div class="description">{{ product.description }}</div>
-        <UCarousel v-if="product.images" v-slot="{ item }" :arrows="product.images.length > 1" :items="product.images"
-            class="gallery">
-            <NuxtImg width="100%" :src="item" />
+        <UCarousel v-if="product.images" v-slot="{ item }" :arrows="product.images.length > 1" :items="product.images">
+            <NuxtImg :src="item" />
         </UCarousel>
         <div class="actions">
             <button class="price" @click="addCart">
@@ -57,6 +56,13 @@ function addCart() {
 
 .description {
     font-size: 1em;
+}
+
+img {
+    width: 100%;
+    max-height: 500px;
+    margin: auto;
+    object-fit: contain;
 }
 
 .actions {

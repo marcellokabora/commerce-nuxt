@@ -27,7 +27,7 @@ function addCart() {
         <div class="description">{{ product.description }}</div>
         <UCarousel v-if="product.images" v-slot="{ item }" :arrows="product.images.length > 1" :items="product.images"
             class="gallery w-full max-w-xs mx-auto">
-            <NuxtImg width="400px" height="400px" :src="item" />
+            <NuxtImg :src="item" />
         </UCarousel>
         <div class="actions">
             <button class="price" @click="addCart">
@@ -55,6 +55,12 @@ function addCart() {
 
 .description {
     font-size: 1em;
+}
+
+img {
+    object-fit: contain;
+    margin: auto;
+    height: 400px
 }
 
 .actions {
