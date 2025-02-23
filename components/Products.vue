@@ -1,16 +1,12 @@
 <script setup lang="ts">
 import type { Product } from '~/types/types';
 
-const { products } = defineProps<{ products: Product[] }>()
+const { products, removable } = defineProps<{ products: Product[], removable?: boolean }>()
 const favorites = favoriteCookie().products
 let filtered = products
 if (favorites) {
-    for (const name of Object.keys(favorites.value)) {
-        console.log(`Cookie: ${name}`);
-    }
-
     filtered = products.map(value => {
-        value.favorite = favorites.value.includes(value.id)
+        value.favorite = favorites.value.map(favorite => favorite.id).includes(value.id)
         return value
     })
 }
@@ -19,7 +15,7 @@ if (favorites) {
 <template>
     <section class="products">
         <div v-for="product of filtered" :key="product.id">
-            <Card :product="product" />
+            <Card :product="product" :removable="removable" />
         </div>
     </section>
 </template>

@@ -3,57 +3,58 @@ import type { Product } from '~/types/types';
 
 const modal = useModal()
 
-defineProps<{
-    product: Product
-}>()
+const { product } = defineProps<{ product: Product }>()
+
+function onFavorite() {
+    if (favoriteCookie().products.value.includes(product.id)) {
+        product.favorite = false
+        favoriteCookie().remove(product.id)
+    } else {
+        product.favorite = true
+        favoriteCookie().set(product.id)
+    }
+}
+
+function addCart() {
+    cartCookie().set(product.id)
+}
 
 </script>
 
 <template>
-    <UCard>
-        <template #header>
-            <h3 class="title">{{ product.title }}</h3>
-        </template>
+    <div class="modal">
+        <h3 class="title">{{ product.title }}</h3>
         <div class="description">{{ product.description }}</div>
-        <div class="stock">Stock {{ product.stock }}</div>
         <UCarousel v-slot="{ item }" :arrows="product.images.length > 1" :items="product.images"
             class="gallery w-full max-w-xs mx-auto">
             <NuxtImg width="400px" height="400px" :src="item" />
         </UCarousel>
-        <template #footer>
-            <div class="actions">
-                <span class="price">Buy {{ product.price }}
-                    <Icon name="material-symbols:euro" />
-                </span>
-                <button class="favorite" @click="modal.close()">
-                    <Icon name="material-symbols:favorite" />
-                    <span>{{ product.favorite ? "Remove" : "Add" }}</span>
-                </button>
-            </div>
-        </template>
-    </UCard>
+        <div class="actions">
+            <button class="price" @click="addCart">
+                <span>Buy {{ product.price }}</span>
+                <Icon name="material-symbols:euro" />
+            </button>
+            <button class="favorite" @click="onFavorite">
+                <Icon name="material-symbols:favorite" />
+                <span>{{ product.favorite ? "Remove" : "Add" }}</span>
+            </button>
+        </div>
+    </div>
 </template>
 
 <style scoped>
-.title {
-    font-size: 1.2em;
+.modal {
+    padding: 2em;
 }
 
-.actions {
-    background-color: var(--ui-primary);
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    border-radius: 1em;
-    padding: 1em 1.5em;
+.title {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 1em;
 }
 
 .description {
     font-size: 1em;
-}
-
-.stock {
-    margin-top: 1em;
 }
 
 .gallery {
@@ -66,30 +67,30 @@ defineProps<{
     }
 }
 
-.radios {
+.actions {
+    background-color: var(--ui-primary);
+    color: white;
     display: flex;
-    justify-content: center;
-
-    button {
-        border: none;
-        background-color: transparent;
-        cursor: pointer;
-        opacity: 0.6;
-        zoom: 0.7;
-        color: var(--ui-primary);
-    }
+    justify-content: space-between;
+    border-radius: 1em;
+    padding: 1em 1.5em;
 }
-
 
 .price {
     display: flex;
     align-items: center;
     gap: 0.5em;
+    background-color: rgb(255, 255, 255);
+    padding: 1em 1.5em;
+    border-radius: 100px;
+    cursor: pointer;
+    color: var(--ui-primary);
 
-    mat-icon {
-        zoom: 0.8;
+    .iconify {
+        font-size: 1.2em;
     }
 }
+
 
 .favorite {
     display: flex;

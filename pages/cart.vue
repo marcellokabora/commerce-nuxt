@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Product } from '~/types/types';
 
-let favorites: Product[] = favoriteCookie().products.value
+let favorites: Product[] = cartCookie().products.value
 
 </script>
 

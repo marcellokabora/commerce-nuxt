@@ -39,16 +39,19 @@ function onSearch(event: any) {
             <div class="menus">
                 <NuxtLink to="/">Products</NuxtLink>
                 <NuxtLink to="/favorites">Favorites</NuxtLink>
-                <!-- <NuxtLink v-for="menu in topone" :to="'/category/' + menu.slug">{{ menu.name }}</NuxtLink> -->
             </div>
         </div>
         <div class="asider" v-if="categories">
-            <USelectMenu v-model="category" :items="items" class="w-48" placeholder="Categories" @change="onChange" />
+            <USelectMenu highlight v-model="category" :items="items" class="w-48" placeholder="Categories"
+                @change="onChange" />
             <form @submit="onSearch">
-                <UInput v-model="search" color="primary" variant="outline" placeholder="Search..." />
+                <UInput highlight v-model="search" color="primary" variant="outline" placeholder="Search..." />
             </form>
             <UChip :text="cart?.length" size="3xl" :show="cart.length > 0">
-                <UButton icon="material-symbols:shop-rounded" size="xl" class="font-bold rounded-full cursor-pointer" />
+                <NuxtLink to="/cart">
+                    <UButton icon="material-symbols:shopping-cart-sharp" size="xl"
+                        class="font-bold rounded-full cursor-pointer" />
+                </NuxtLink>
             </UChip>
         </div>
     </nav>

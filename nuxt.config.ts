@@ -6,4 +6,8 @@ export default defineNuxtConfig({
   ui: {
     colorMode: false,
   },
+  image: {
+    format: ['webp'],
+    domains: ['dummyjson.com']
+  }
 });

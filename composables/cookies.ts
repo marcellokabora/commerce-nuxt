@@ -1,22 +1,22 @@
 import type { Product } from "~/types/types";
 
 export const favoriteCookie = () => {
-  const products = useCookie<string[]>('favorite', {
+  const products = useCookie<Product[]>('favorite', {
     default: () => [],
     watch: true,
     encode: value => JSON.stringify(value),
     decode: value => JSON.parse(value)
 })
 
-  const set = (id:string) => {
-    products.value.push(id);
+  const set = (product:Product) => {
+    products.value.push(product);
   };
 
   const get = () => products.value;
 
-  const remove = (id:string) => {
-    products.value = products.value.filter(value => value!==id)
-  };  
+  const remove = (product:Product) => {
+    products.value = products.value.filter(value => value.id!==product.id)
+  };
 
   return {
     set,
@@ -27,21 +27,21 @@ export const favoriteCookie = () => {
 };
 
 export const cartCookie = () => {
-  const products = useCookie<string[]>('cart', {
+  const products = useCookie<Product[]>('cart', {
     default: () => [],
     watch: true,
     encode: value => JSON.stringify(value),
     decode: value => JSON.parse(value)
 })
 
-  const set = (id:string) => {
-    products.value.push(id);
+  const set = (product:Product) => {
+    products.value.push(product);
   };
 
   const get = () => products.value;
 
-  const remove = (id:string) => {
-    products.value = products.value.filter(value => value!==id)
+  const remove = (product:Product) => {
+    products.value = products.value.filter(value => value.id!==product.id)
   };  
 
   return {

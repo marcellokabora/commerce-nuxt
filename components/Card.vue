@@ -1,19 +1,45 @@
 <script setup lang="ts">
 import type { Product } from '~/types/types';
 
-const { product } = defineProps<{ product: Product }>()
+const { product, removable } = defineProps<{ product: Product, removable?: boolean }>()
+
+let visible = ref(true);
+const path: string = useRoute().name?.toString()!
+console.log(path);
+
 
 function addCart() {
-    cartCookie().set(product.id)
+    const cart: Product = {
+        id: product.id,
+        thumbnail: product.thumbnail,
+        title: product.title,
+        price: product.price,
+    }
+    cartCookie().set(cart)
 }
 
 function onFavorite() {
-    if (favoriteCookie().products.value.includes(product.id)) {
+    const favorite: Product = {
+        id: product.id,
+        thumbnail: product.thumbnail,
+        title: product.title,
+        price: product.price,
+    }
+    if (favoriteCookie().products.value.includes(favorite)) {
         product.favorite = false
-        favoriteCookie().remove(product.id)
+        favoriteCookie().remove(favorite)
     } else {
         product.favorite = true
-        favoriteCookie().set(product.id)
+        favoriteCookie().set(favorite)
+    }
+}
+
+function onRemove() {
+    visible.value = false
+    if (path === "favorites") {
+        favoriteCookie().remove(product)
+    } else if (path === "cart") {
+        cartCookie().remove(product)
     }
 }
 
@@ -21,7 +47,7 @@ function onFavorite() {
 </script>
 
 <template>
-    <div class="product">
+    <div class="product" v-if="visible">
         <div class="container">
             <NuxtLink :to="'/product/' + product.id">
                 <NuxtImg :src="product.thumbnail" alt={{product.id}} />
@@ -36,17 +62,24 @@ function onFavorite() {
             </div>
         </div>
         <div class="actions">
-            <button class="favorite" :class="{ active: product.favorite }" title="Favorite" @click="onFavorite">
-                <Icon name="material-symbols:favorite" />
-            </button>
-            <UModal>
-                <button class="favorite" title="Preview">
-                    <Icon name="material-symbols:visibility" />
+            <div v-if="removable">
+                <button class="favorite" title="Remove" @click="onRemove">
+                    <Icon name="material-symbols:delete" />
                 </button>
-                <template #content>
-                    <Product :product="product" />
-                </template>
-            </UModal>
+            </div>
+            <div v-else class="block">
+                <button class="favorite" :class="{ active: product?.favorite }" title="Favorite" @click="onFavorite">
+                    <Icon name="material-symbols:favorite" />
+                </button>
+                <UModal>
+                    <button class="favorite" title="Preview">
+                        <Icon name="material-symbols:visibility" />
+                    </button>
+                    <template #content>
+                        <Product :product="product" />
+                    </template>
+                </UModal>
+            </div>
         </div>
     </div>
 </template>
@@ -60,7 +93,6 @@ function onFavorite() {
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
     position: relative;
     transition: all 0.2s;
-    /* box-shadow: 0px 0px 0px 0.2em rgba(255, 255, 255, 0.2); */
 
     .container {
         text-align: center;
@@ -118,8 +150,12 @@ function onFavorite() {
         position: absolute;
         top: 1em;
         right: 1em;
-        display: grid;
-        gap: 1em;
+
+        .block {
+            display: grid;
+            gap: 1em;
+
+        }
     }
 
     .favorite {

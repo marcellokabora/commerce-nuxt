@@ -3,12 +3,10 @@ export interface Product {
   thumbnail: string;
   title: string;
   price: string;
-  rating: string;
-  stock: string;
-  description: string;
-  images: string[];
-  favorite: boolean;
-  category: string;
+  description?: string;
+  images?: string[];
+  favorite?: boolean;
+  category?: string;
 }
 
 export interface ProductsData {
