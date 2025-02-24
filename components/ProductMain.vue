@@ -197,6 +197,15 @@ if (favorites) {
         align-items: center;
         justify-content: center;
         border: 1px solid silver;
+
+        &.active {
+            background-color: var(--ui-primary);
+            color: white;
+        }
+
+        &:hover:not(.active) {
+            color: var(--ui-primary);
+        }
     }
 }
 </style>

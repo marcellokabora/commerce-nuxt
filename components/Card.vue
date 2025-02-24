@@ -153,10 +153,6 @@ function onRemove() {
         justify-content: center;
         border: 1px solid silver;
 
-        mat-icon {
-            zoom: 0.8;
-        }
-
         &.active {
             background-color: var(--ui-primary);
             color: white;
