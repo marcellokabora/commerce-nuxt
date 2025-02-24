@@ -9,5 +9,8 @@ export default defineNuxtConfig({
   image: {
     format: ['webp'],
     domains: ['dummyjson.com']
+  },
+  typescript: {
+    typeCheck: true
   }
 });

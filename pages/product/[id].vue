@@ -6,9 +6,7 @@ const { data } = await useFetch<any>('https://dummyjson.com/product/' + id)
 
 <template>
     <section>
-        <div v-if="data" class="container">
-            <ProductMain :product="data" />
-        </div>
+        <ProductMain v-if="data" :product="data" />
         <div v-else class="nodata">No Data</div>
     </section>
 </template>
@@ -18,10 +16,5 @@ section {
     margin: auto;
     background-color: white;
     min-height: 100vh;
-
-    .container {
-        max-width: 800px;
-        margin: auto;
-    }
 }
 </style>

@@ -7,6 +7,12 @@ export interface Product {
   images?: string[];
   favorite?: boolean;
   category?: string;
+  discountPercentage?: number
+  brand?:string
+  warrantyInformation?:string
+  shippingInformation?:string
+  reviews?:any[]
+  returnPolicy?:string
 }
 
 export interface ProductsData {

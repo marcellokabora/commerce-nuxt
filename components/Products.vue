@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Product } from '~/types/types';
 
-const { products, removable } = defineProps<{ products: Product[], removable?: boolean }>()
+const { products } = defineProps<{ products: Product[] }>()
 const favorites = favoriteCookie().products
 let filtered = products
 if (favorites) {
@@ -15,7 +15,7 @@ if (favorites) {
 <template>
     <section class="products">
         <div v-for="product of filtered" :key="product.id">
-            <Card :product="product" :removable="removable" />
+            <Card :product="product" />
         </div>
     </section>
 </template>

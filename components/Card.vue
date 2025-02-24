@@ -1,40 +1,16 @@
 <script setup lang="ts">
+import { pagination } from '#build/ui';
 import type { Product } from '~/types/types';
 
-const { product, removable } = defineProps<{ product: Product, removable?: boolean }>()
+const { product } = defineProps<{ product: Product }>()
 
-let visible = ref(true);
+let visible = ref(true)
 const path: string = useRoute().name?.toString()!
-
-function addCart() {
-    const cart: Product = {
-        id: product.id,
-        thumbnail: product.thumbnail,
-        title: product.title,
-        price: product.price,
-    }
-    cartCookie().set(cart)
-}
-
-function onFavorite() {
-    const favorite: Product = {
-        id: product.id,
-        thumbnail: product.thumbnail,
-        title: product.title,
-        price: product.price,
-    }
-    if (favoriteCookie().products.value.includes(favorite)) {
-        product.favorite = false
-        favoriteCookie().remove(favorite)
-    } else {
-        product.favorite = true
-        favoriteCookie().set(favorite)
-    }
-}
 
 function onRemove() {
     visible.value = false
     if (path === "favorites") {
+        ; pagination
         favoriteCookie().remove(product)
     } else if (path === "cart") {
         cartCookie().remove(product)
@@ -51,8 +27,16 @@ function onRemove() {
                 <NuxtImg :src="product.thumbnail" alt={{product.id}} />
                 <div class="title">{{ product.title }}</div>
             </NuxtLink>
-            <div class="infos" @click="addCart">
+
+            <div v-if="!['cart'].includes(path)" class="infos" @click="addCart(product)">
                 <div>Buy</div>
+                <div class="info">
+                    <span>{{ product.price }}</span>
+                    <Icon name="material-symbols:euro" />
+                </div>
+            </div>
+            <div v-else class="infos">
+                <div>Price</div>
                 <div class="info">
                     <span>{{ product.price }}</span>
                     <Icon name="material-symbols:euro" />
@@ -60,13 +44,14 @@ function onRemove() {
             </div>
         </div>
         <div class="actions">
-            <div v-if="removable">
+            <div v-if="['favorites', 'cart'].includes(path)">
                 <button class="favorite" title="Remove" @click="onRemove">
                     <Icon name="material-symbols:delete" />
                 </button>
             </div>
             <div v-else class="block">
-                <button class="favorite" :class="{ active: product?.favorite }" title="Favorite" @click="onFavorite">
+                <button class="favorite" :class="{ active: product?.favorite }" title="Favorite"
+                    @click="onFavorite(product)">
                     <Icon name="material-symbols:favorite" />
                 </button>
                 <UModal>

@@ -5,19 +5,6 @@ const modal = useModal()
 
 const { product } = defineProps<{ product: Product }>()
 
-function onFavorite() {
-    if (favoriteCookie().products.value.includes(product)) {
-        product.favorite = false
-        favoriteCookie().remove(product)
-    } else {
-        product.favorite = true
-        favoriteCookie().set(product)
-    }
-}
-
-function addCart() {
-    cartCookie().set(product)
-}
 
 </script>
 
@@ -30,11 +17,11 @@ function addCart() {
             <NuxtImg :src="item" />
         </UCarousel>
         <div class="actions">
-            <button class="price" @click="addCart">
+            <button class="price" @click="addCart(product)">
                 <span>Buy {{ product.price }}</span>
                 <Icon name="material-symbols:euro" />
             </button>
-            <button class="favorite" @click="onFavorite">
+            <button class="favorite" @click="onFavorite(product)">
                 <Icon name="material-symbols:favorite" />
                 <span>{{ product.favorite ? "Remove" : "Add" }}</span>
             </button>

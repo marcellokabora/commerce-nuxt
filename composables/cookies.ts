@@ -51,3 +51,32 @@ export const cartCookie = () => {
     products: products
   };
 };
+
+export function onFavorite(product:Product) {
+  const favorite: Product = {
+      id: product.id,
+      thumbnail: product.thumbnail,
+      title: product.title,
+      price: product.price,
+  }
+  if (favoriteCookie().products.value.map(value => value.id).includes(product.id)) {
+      product.favorite = false
+      favoriteCookie().remove(favorite)
+  } else {
+      product.favorite = true
+      favoriteCookie().set(favorite)
+  }
+}
+
+export function addCart(product:Product) {
+  if (!cartCookie().products.value.map(value => value.id).includes(product.id)) {
+    const cart: Product = {
+        id: product.id,
+        thumbnail: product.thumbnail,
+        title: product.title,
+        price: product.price,
+    }
+    cartCookie().set(cart)
+  }
+}
+
