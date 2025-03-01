@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { pagination } from '#build/ui';
 import type { Product } from '~/types/types';
 
 const { product } = defineProps<{ product: Product }>()
@@ -10,13 +9,11 @@ const path: string = useRoute().name?.toString()!
 function onRemove() {
     visible.value = false
     if (path === "favorites") {
-        ; pagination
         favoriteCookie().remove(product)
     } else if (path === "cart") {
         cartCookie().remove(product)
     }
 }
-
 
 </script>
 

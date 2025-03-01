@@ -13,15 +13,15 @@ if (favorites) {
 </script>
 
 <template>
-    <section class="products">
+    <div class="products">
         <div v-for="product of filtered" :key="product.id">
             <Card :product="product" />
         </div>
-    </section>
+    </div>
 </template>
 
 <style scoped>
-section.products {
+.products {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 1em;
