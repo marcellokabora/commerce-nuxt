@@ -13,6 +13,7 @@ export interface Product {
   shippingInformation?:string
   reviews?:any[]
   returnPolicy?:string
+  times?:number
 }
 
 export interface ProductsData {

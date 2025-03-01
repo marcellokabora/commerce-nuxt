@@ -34,11 +34,20 @@ export const cartCookie = () => {
     decode: value => JSON.parse(value)
 })
 
-  const set = (product:Product) => {
-    products.value.push(product);
-  };
+const set = (product:Product) => {
+  products.value.push(product);
+};
 
-  const get = () => products.value;
+const update = (product:Product) => {
+  products.value = products.value.map(value => {
+    if(value.id === product.id){
+      value = product
+    }
+    return value
+  })
+};
+
+const get = () => products.value;
 
   const remove = (product:Product) => {
     products.value = products.value.filter(value => value.id!==product.id)
@@ -48,6 +57,7 @@ export const cartCookie = () => {
     set,
     get,
     remove,
+    update,
     products: products
   };
 };

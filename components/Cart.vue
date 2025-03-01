@@ -4,7 +4,7 @@ import type { Product } from '~/types/types';
 const products = cartCookie().products
 
 let total = computed<number>(() => {
-    let price = products.value.reduce((total, item) => total + item.price, 0);
+    let price = products.value.reduce((total, item) => total + (item.price * (item.times || 1)), 0);
     return Math.ceil(price * 100) / 100;
 })
 
@@ -32,11 +32,12 @@ let total = computed<number>(() => {
     margin-top: 2em;
     position: sticky;
     top: 105px;
-    height: calc(100vh - 130px);
     padding: 2em;
     display: grid;
+    gap: 2em;
     grid-template-rows: 1fr auto;
     min-width: 200px;
+    text-align: center;
 
     .title {
         font-weight: bold;
@@ -49,6 +50,7 @@ let total = computed<number>(() => {
         width: 100%;
         zoom: 1.2;
         cursor: pointer;
+        text-align: center;
     }
 }
 </style>

@@ -5,14 +5,38 @@ const { product } = defineProps<{ product: Product }>()
 
 let visible = ref(true)
 const path: string = useRoute().name?.toString()!
+const toast = useToast()
+
+const isCart = computed<boolean>(() => path === "cart")
+const isFavo = computed<boolean>(() => path === "favorites")
+
+let times = ref(product.times || 1)
 
 function onRemove() {
     visible.value = false
-    if (path === "favorites") {
+    if (isFavo.value) {
         favoriteCookie().remove(product)
-    } else if (path === "cart") {
+    } else if (isCart.value) {
         cartCookie().remove(product)
     }
+}
+
+function showToast() {
+    addCart(product);
+    toast.add({
+        title: product.title + ' added to the cart.',
+        icon: "material-symbols:add-shopping-cart"
+    })
+}
+
+function onTimes(value: number) {
+    if (value > 0) {
+        times.value++
+    } else if (times.value > 1) {
+        times.value--
+    }
+    product.times = times.value
+    cartCookie().update(product)
 }
 
 </script>
@@ -24,24 +48,30 @@ function onRemove() {
                 <NuxtImg :src="product.thumbnail" alt={{product.id}} />
                 <div class="title">{{ product.title }}</div>
             </NuxtLink>
-
-            <div v-if="!['cart'].includes(path)" class="infos" @click="addCart(product)">
+            <div v-if="!isCart" class="infos" @click="showToast">
                 <div>Buy</div>
                 <div class="info">
                     <span>{{ product.price }}</span>
                     <Icon name="material-symbols:euro" />
                 </div>
             </div>
-            <div v-else class="infos">
-                <div>Price</div>
-                <div class="info">
-                    <span>{{ product.price }}</span>
-                    <Icon name="material-symbols:euro" />
+            <div v-else class="times">
+                <div class="info price">
+                    <div>Price</div>
+                    <div class="info">
+                        <span>{{ product.price }}</span>
+                        <Icon name="material-symbols:euro" />
+                    </div>
+                </div>
+                <div class="info more">
+                    <UButton icon="material-symbols:remove-rounded" @click="onTimes(-1)" :disabled="times === 1" />
+                    <span>{{ times }}</span>
+                    <UButton icon="material-symbols:add" @click="onTimes(1)" />
                 </div>
             </div>
         </div>
         <div class="actions">
-            <div v-if="['favorites', 'cart'].includes(path)">
+            <div v-if="isCart || isFavo">
                 <button class="favorite" title="Remove" @click="onRemove">
                     <Icon name="material-symbols:delete" />
                 </button>
@@ -127,6 +157,37 @@ function onRemove() {
         }
     }
 
+    .times {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 1em;
+        width: 100%;
+        padding: 1em;
+        margin-bottom: -1em;
+
+        .info {
+            display: flex;
+            align-items: center;
+            gap: 0.3em;
+
+            &.price {
+                font-weight: bold;
+                font-size: 1.2em;
+            }
+
+            &.more {
+                gap: 1em;
+            }
+
+            button {
+                cursor: pointer;
+            }
+        }
+    }
+
+
     .actions {
         position: absolute;
         top: 1em;
@@ -135,7 +196,6 @@ function onRemove() {
         .block {
             display: grid;
             gap: 1em;
-
         }
     }
 
