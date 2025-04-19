@@ -187,7 +187,6 @@ function onTimes(value: number) {
         }
     }
 
-
     .actions {
         position: absolute;
         top: 1em;
