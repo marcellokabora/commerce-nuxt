@@ -8,12 +8,12 @@ export interface Product {
   favorite?: boolean;
   category?: string;
   discountPercentage?: number
-  brand?:string
-  warrantyInformation?:string
-  shippingInformation?:string
-  reviews?:any[]
-  returnPolicy?:string
-  times?:number
+  brand?: string
+  warrantyInformation?: string
+  shippingInformation?: string
+  reviews?: any[]
+  returnPolicy?: string
+  times?: number
 }
 
 export interface ProductsData {
