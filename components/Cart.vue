@@ -74,7 +74,7 @@ async function handleCheckout() {
     margin-right: 2em;
     margin-top: 2em;
     position: sticky;
-    top: 105px;
+    top: 6em;
     display: grid;
     gap: 1.5em;
     min-width: 280px;

@@ -81,7 +81,6 @@ if (favorites) {
     margin: auto;
     background: white;
     border-radius: 16px;
-    margin: 4em auto;
 }
 
 .main {
@@ -131,7 +130,7 @@ if (favorites) {
 
     .reviews {
         display: grid;
-        gap: 1.5em;
+        gap: 1em;
 
         .review {
             display: flex;
@@ -143,10 +142,6 @@ if (favorites) {
 
             &:hover {
                 transform: translateY(-2px);
-            }
-
-            &:not(:last-child) {
-                margin-bottom: 1em;
             }
 
             .infos {
