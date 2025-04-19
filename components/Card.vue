@@ -5,8 +5,6 @@ const { product } = defineProps<{ product: Product }>()
 
 let visible = ref(true)
 const path: string = useRoute().name?.toString()!
-const toast = useToast()
-
 const isCart = computed<boolean>(() => path === "cart")
 const isFavo = computed<boolean>(() => path === "favorites")
 
@@ -19,14 +17,6 @@ function onRemove() {
     } else if (isCart.value) {
         cartCookie().remove(product)
     }
-}
-
-function showToast() {
-    addCart(product);
-    toast.add({
-        title: product.title + ' added to the cart.',
-        icon: "material-symbols:add-shopping-cart"
-    })
 }
 
 function onTimes(value: number) {
@@ -48,7 +38,7 @@ function onTimes(value: number) {
                 <NuxtImg :src="product.thumbnail" alt={{product.id}} />
                 <div class="title">{{ product.title }}</div>
             </NuxtLink>
-            <div v-if="!isCart" class="infos" @click="showToast">
+            <div v-if="!isCart" class="infos" @click="addCart(product)">
                 <div>Buy</div>
                 <div class="info">
                     <span>{{ product.price }}</span>

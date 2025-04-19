@@ -14,7 +14,6 @@ const { data } = await useFetch<any>('https://dummyjson.com/product/' + id)
 <style scoped>
 section {
     margin: auto;
-    background-color: white;
-    min-height: 100vh;
+    padding-bottom: 1em;
 }
 </style>

@@ -4,38 +4,25 @@ import { addCart } from '~/composables/cookies';
 
 const { product } = defineProps<{ product: Product }>()
 const favorites = favoriteCookie().products
-const toast = useToast()
 
 if (favorites) {
     product.favorite = favorites.value.find(value => value.id === product.id)?.favorite
 }
 
-function onAddToCart() {
-    addCart(product);
-    toast.add({
-        title: product.title + ' added to the cart.',
-        icon: "material-symbols:add-shopping-cart"
-    })
-}
 </script>
 
 <template>
     <div class="product">
-        <!-- <UCarousel v-if="product.images" v-slot="{ item }" :arrows="product.images.length > 1" :items="product.images"
-            wheel-gestures>
-            <NuxtImg :src="item" />
-        </UCarousel> -->
-
-        <div class="gallery">
-            <NuxtImg v-for="image of product.images" :src="image" />
-        </div>
+        <UCarousel v-if="product.images" v-slot="{ item }" :items="product.images" class="gallery" wheel-gestures dots>
+            <NuxtImg :src="item" class="carousel-image" />
+        </UCarousel>
 
         <div class="main">
             <h3 class="title">{{ product.title }}</h3>
             <div class="description">{{ product.description }}</div>
 
             <div class="actions">
-                <button class="price" @click="onAddToCart">
+                <button class="price" @click="addCart(product);">
                     <span>Buy {{ product.price }}</span>
                     <Icon name="material-symbols:euro" />
                 </button>
@@ -94,6 +81,7 @@ function onAddToCart() {
     margin: auto;
     background: white;
     border-radius: 16px;
+    margin: 4em auto;
 }
 
 .main {
@@ -189,24 +177,17 @@ function onAddToCart() {
 }
 
 .gallery {
-    display: grid;
-    gap: 1.5em;
     width: 400px;
     position: sticky;
-    top: 2em;
+    top: 5em;
+}
 
-    img {
-        width: 100%;
-        height: auto;
-        object-fit: contain;
-        border-radius: 12px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s;
-
-        &:hover {
-            transform: scale(1.02);
-        }
-    }
+.carousel-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .actions {
