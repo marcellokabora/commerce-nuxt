@@ -1,22 +1,30 @@
 <script setup lang="ts">
-import type { Categories, Product } from '~/types/types'
+import type { NavigationMenuItem } from '@nuxt/ui'
+const categories = await $fetch<any[]>('https://dummyjson.com/products/categories')
 
-const categories = await $fetch<Categories[]>('https://dummyjson.com/products/categories')
+const items = ref<NavigationMenuItem[]>([
+    {
+        label: 'Home',
+        icon: 'i-lucide-home',
+        to: '/products',
+    },
+    {
+        label: 'Favorites',
+        icon: 'i-lucide-folder-heart',
+        to: '/favorites',
+    },
+    {
+        label: 'Categories',
+        icon: 'i-lucide-book-open-check',
+        children: categories.map((category) => ({
+            label: category.name,
+            icon: 'i-lucide-book-copy',
+            to: `/category/${category.slug}`,
+        })),
+    },
+])
 
-const items = ref()
-const category = ref()
 let search = ref("")
-const cart = cartCookie().products
-
-if (categories) {
-    items.value = [
-        ...categories.map(value => value.name)
-    ]
-}
-
-function onChange() {
-    navigateTo('/category/' + categories.find(value => value.name === category.value)?.slug)
-}
 
 function onSearch(event: any) {
     event.preventDefault()
@@ -27,125 +35,27 @@ function onSearch(event: any) {
     }
 }
 
+
 </script>
 
 <template>
-    <nav>
-        <div class="asidel">
-            <div class="logo">
-                <img src="/nuxt.svg" alt="" />
-            </div>
-            <div class="menus">
-                <NuxtLink to="/products">Products</NuxtLink>
-                <NuxtLink to="/favorites">Favorites</NuxtLink>
+    <div class="flex items-center justify-between gap-4 sticky top-4 z-10 bg-white shadow-md py-2 px-5 rounded-full">
+        <div class="w-full">
+            <div class="flex items-center gap-2">
+                <NuxtImg src="/nuxt.svg" width="50" />
+                <h1 class="text-xl font-bold text-nowrap">Nuxt Store</h1>
+                <UNavigationMenu :items="items" variant="link" class="w-full gap-4" />
             </div>
         </div>
-        <div class="asider" v-if="categories">
-            <div class="actions">
-                <USelectMenu highlight v-model="category" :items="items" placeholder="Categories" @change="onChange" />
-                <form @submit="onSearch">
-                    <UInput highlight v-model="search" color="primary" variant="outline" placeholder="Search..." />
-                </form>
-            </div>
-            <UChip :text="cart?.length" size="3xl" :show="cart.length > 0">
-                <NuxtLink to="/cart">
-                    <UButton icon="material-symbols:shopping-cart-sharp" size="xl"
-                        class="font-bold rounded-full cursor-pointer" />
-                </NuxtLink>
-            </UChip>
-        </div>
-    </nav>
+        <form @submit="onSearch">
+            <UInput v-model="search" icon="i-lucide-search" placeholder="Search..." variant="subtle"
+                class="w-[200px] rounded-full" />
+        </form>
+        <ULink to="/account" active-class="font-bold" inactive-class="text-muted" class="flex items-center gap-2">
+            <UIcon name="i-lucide-circle-user-round" />
+            <span>Account</span>
+        </ULink>
+        <UButton to="/cart" label="Cart" icon="i-lucide-shopping-cart" class="rounded-full" variant="outline"
+            active-color="primary" active-variant="solid" />
+    </div>
 </template>
-
-
-<style scoped>
-nav {
-    position: sticky;
-    top: 0;
-    display: flex;
-    gap: 2em;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1em 2em;
-    background-color: white;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    overflow: hidden;
-}
-
-.asidel {
-    display: flex;
-    align-items: center;
-    gap: 2em;
-
-    .logo {
-        width: 50px;
-        display: flex;
-        align-items: center;
-
-        img {
-            position: absolute;
-            height: 60px;
-        }
-    }
-
-    .menus {
-        display: flex;
-        overflow: hidden;
-        flex: 1;
-    }
-
-    a {
-        color: black;
-        text-decoration: none;
-        padding: .5em 1em;
-        border-radius: 100px;
-        font-size: bold;
-
-        &:hover {
-            color: var(--ui-primary);
-        }
-
-        &.router-link-active {
-            background-color: var(--ui-primary);
-            color: white;
-        }
-    }
-}
-
-.asider {
-    display: flex;
-    align-items: center;
-    gap: 1em;
-
-    .actions {
-        display: flex;
-        gap: 1em;
-    }
-
-}
-
-@media (width<800px) {
-    nav {
-        gap: 1em;
-    }
-
-    .asidel {
-        justify-content: center;
-        gap: 1em;
-
-        .logo {
-            img {
-                position: relative;
-            }
-        }
-    }
-
-    .asider {
-        .actions {
-            display: none;
-        }
-    }
-
-}
-</style>

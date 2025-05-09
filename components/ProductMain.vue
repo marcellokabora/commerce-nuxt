@@ -79,7 +79,6 @@ if (favorites) {
     gap: 3em;
     max-width: 1200px;
     margin: auto;
-    background: white;
     border-radius: 16px;
 }
 

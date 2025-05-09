@@ -5,9 +5,7 @@ const { data } = await useFetch<ProductsData>('https://dummyjson.com/products/ca
 </script>
 
 <template>
-    <div v-if="data == null">
-        No data
-    </div>
+    <div v-if="data == null">No data</div>
     <div v-else>
         <Products :products="data.products" />
     </div>

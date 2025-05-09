@@ -34,7 +34,7 @@ function onTimes(value: number) {
     <div class="product bg-white rounded-xl shadow-md relative transition-all duration-200">
         <div class="container text-center flex flex-col items-center justify-between gap-4 p-8">
             <NuxtLink :to="'/product/' + product.id">
-                <NuxtImg :src="product.thumbnail" :alt="product.id"
+                <NuxtImg :src="product.thumbnail"
                     class="w-auto h-36 mx-auto transition-all duration-500 object-contain" />
                 <div class="title font-medium h-12 overflow-hidden flex items-center justify-center">
                     {{ product.title }}

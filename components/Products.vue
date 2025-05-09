@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { Product } from '~/types/types';
-import { onFavorite, addCart } from '~/composables/cookies';
 import { computed } from 'vue';
 
 const props = defineProps<{ products: Product[] }>()

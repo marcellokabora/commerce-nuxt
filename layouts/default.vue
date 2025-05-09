@@ -1,11 +1,10 @@
-<script setup lang="ts">
-</script>
-
 <template>
-  <Navbar />
-  <main>
-    <slot />
-  </main>
+  <UApp>
+    <UContainer>
+      <Navbar />
+      <main>
+        <slot />
+      </main>
+    </UContainer>
+  </UApp>
 </template>
-
-<style scoped></style>

@@ -32,28 +32,29 @@ async function handleCheckout() {
 </script>
 
 <template>
-    <div class="cart">
-        <div class="header">
-            <div class="title">Shopping Cart</div>
-            <div class="item-count">{{ itemCount }} items</div>
+    <div class="cart bg-white rounded-lg shadow-md p-6 sticky top-24 grid gap-6 min-w-[280px] mr-8 mt-8">
+        <div class="header text-center pb-4 border-b border-gray-200">
+            <div class="title font-bold text-lg mb-2">Shopping Cart</div>
+            <div class="item-count text-gray-500 text-sm">{{ itemCount }} items</div>
         </div>
 
-        <div class="price-details">
-            <div class="price-row">
+        <div class="price-details grid gap-3">
+            <div class="price-row flex justify-between items-center py-1">
                 <span>Subtotal</span>
                 <span>{{ subtotal.toFixed(2) }} €</span>
             </div>
-            <div class="price-row discount">
+            <div class="price-row discount text-green-500 flex justify-between items-center py-1">
                 <span>Discount (20%)</span>
                 <span>-{{ discount.toFixed(2) }} €</span>
             </div>
-            <div class="price-row total">
+            <div
+                class="price-row total font-bold text-lg flex justify-between items-center pt-3 border-t border-gray-200">
                 <span>Total</span>
                 <span>{{ total.toFixed(2) }} €</span>
             </div>
         </div>
 
-        <div class="actions">
+        <div class="actions grid gap-3">
             <UButton color="error" variant="soft" icon="i-lucide-trash-2" @click="cart.clear()"
                 :disabled="products.length === 0">
                 Clear Cart
@@ -65,70 +66,3 @@ async function handleCheckout() {
         </div>
     </div>
 </template>
-
-<style scoped>
-.cart {
-    padding: 1.5em;
-    background-color: white;
-    border-radius: 1em;
-    margin-right: 2em;
-    margin-top: 2em;
-    position: sticky;
-    top: 6em;
-    display: grid;
-    gap: 1.5em;
-    min-width: 280px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-
-    .header {
-        text-align: center;
-        padding-bottom: 1em;
-        border-bottom: 1px solid #eee;
-
-        .title {
-            font-weight: bold;
-            font-size: 1.2em;
-            margin-bottom: 0.5em;
-        }
-
-        .item-count {
-            color: #666;
-            font-size: 0.9em;
-        }
-    }
-
-    .price-details {
-        display: grid;
-        gap: 0.8em;
-
-        .price-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.3em 0;
-
-            &.discount {
-                color: #10b981;
-            }
-
-            &.total {
-                font-weight: bold;
-                font-size: 1.1em;
-                padding-top: 0.8em;
-                border-top: 1px solid #eee;
-            }
-        }
-    }
-
-    .actions {
-        display: grid;
-        gap: 0.8em;
-
-        button {
-            width: 100%;
-            padding: 0.8em;
-            font-weight: 500;
-        }
-    }
-}
-</style>
