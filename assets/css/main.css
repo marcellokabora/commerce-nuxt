@@ -2,6 +2,12 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
 
+@theme {
+    --color-primary: var(--ui-primary);
+    --color-secondary: var(--ui-secondary);
+}
+
+
 :root {
     --ui-primary: #00ba6d;
     --ui-secondary: #008a51;
@@ -9,7 +15,6 @@
     --ui-info: var(--ui-color-info-500);
     --ui-warning: var(--ui-color-warning-500);
     --ui-error: var(--ui-color-error-500);
-
     --color-secondary: #008a51;
 }
 
