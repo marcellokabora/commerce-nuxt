@@ -22,7 +22,7 @@ if (favorites) {
             <div class="description">{{ product.description }}</div>
 
             <div class="actions">
-                <button class="price" @click="addCart(product);">
+                <button class="price" @click="addCart(product)">
                     <span>Buy {{ product.price }}</span>
                     <Icon name="material-symbols:euro" />
                 </button>

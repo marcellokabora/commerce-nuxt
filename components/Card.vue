@@ -40,14 +40,13 @@ function onTimes(value: number) {
                     {{ product.title }}
                 </div>
             </NuxtLink>
-            <div v-if="!isCart"
-                class="infos flex items-center justify-center gap-4 bg-primary w-full rounded-xl p-4 text-white mb-[-1em] cursor-pointer transition-all duration-200 hover:shadow-md">
-                <div>Buy</div>
-                <div class="info flex items-center gap-1">
-                    <span>{{ product.price }}</span>
-                    <Icon name="material-symbols:euro" />
-                </div>
-            </div>
+            <UButton v-if="!isCart"
+                class="w-full justify-center h-12 cursor-pointer rounded-full transition-transform duration-200 hover:scale-105 hover:bg-color-primary"
+                @click="addCart(product)">
+                Buy
+                <Icon name="material-symbols:euro" />
+                {{ product.price }}
+            </UButton>
             <div v-else class="times flex items-center justify-center flex-col gap-4 w-full p-4 mb-[-1em]">
                 <div class="info price font-bold text-lg flex items-center gap-1">
                     <div>Price</div>
@@ -65,25 +64,17 @@ function onTimes(value: number) {
         </div>
         <div class="actions absolute top-4 right-4">
             <div v-if="isCart || isFavo">
-                <button
-                    class="favorite border rounded-full h-10 w-10 flex items-center justify-center border-gray-300 cursor-pointer"
-                    title="Remove" @click="onRemove">
-                    <Icon name="material-symbols:delete" />
-                </button>
+                <UButton icon="i-lucide-trash" color="error" class="rounded-full text-xl p-2 cursor-pointer"
+                    @click="onRemove" />
             </div>
             <div v-else class="grid gap-4">
-                <button
-                    class="favorite border rounded-full h-10 w-10 flex items-center justify-center border-gray-300 cursor-pointer"
-                    :class="{ 'bg-red-400 text-white': product?.favorite }" title="Favorite"
-                    @click="onFavorite(product)">
-                    <Icon name="material-symbols:favorite" />
-                </button>
-                <UModal>
-                    <button
-                        class="favorite preview border rounded-full h-10 w-10 flex items-center justify-center border-gray-300 cursor-pointer"
-                        title="Preview">
-                        <Icon name="material-symbols:visibility" />
-                    </button>
+                <UButton icon="i-lucide-heart" :color="product.favorite ? 'error' : 'neutral'"
+                    :variant="product.favorite ? 'solid' : 'outline'" class="rounded-full text-xl p-2 cursor-pointer"
+                    @click="onFavorite(product)" />
+                <UModal class="sm:flex hidden">
+                    <UButton icon="i-lucide-eye" color="neutral" variant="outline"
+                        class="rounded-full text-xl p-2 cursor-pointer" />
+
                     <template #content>
                         <ProductView :product="product" />
                     </template>
@@ -92,11 +83,3 @@ function onTimes(value: number) {
         </div>
     </div>
 </template>
-
-<style scoped>
-@media (width<1000px) {
-    .preview {
-        display: none;
-    }
-}
-</style>
