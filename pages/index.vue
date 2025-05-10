@@ -1,5 +1,8 @@
 <template>
-    <div class="fixed inset-0 bg-cover bg-center bg-no-repeat blur-sm" style="background-image: url('/shop.webp')">
+    <div class="fixed inset-0">
+        <div class="w-full h-full bg-cover bg-center bg-no-repeat transform scale-110 blur-sm"
+            style="background-image: url('/shop.webp')">
+        </div>
     </div>
 
     <div class="relative bg-cover bg-center pt-40">
