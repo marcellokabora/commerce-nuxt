@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { Product } from '~/types/types';
+import { computed } from 'vue';
 
-let favorites: Product[] = favoriteCookie().products.value
+const favorites = computed(() => favoriteCookie().products.value);
 
 </script>
 
 <template>
     <Products v-if="favorites[0]" :products="favorites" />
-    <div v-else class="nodata">No data</div>
+    <div v-else class="text-center pt-40 text-lg">No products in favorite</div>
 </template>

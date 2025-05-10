@@ -76,7 +76,7 @@ function onTimes(value: number) {
                         class="rounded-full text-xl p-2 cursor-pointer" />
 
                     <template #content>
-                        <ProductView :product="product" />
+                        <Preview :product="product" />
                     </template>
                 </UModal>
             </div>

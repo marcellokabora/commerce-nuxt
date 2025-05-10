@@ -32,7 +32,7 @@ async function handleCheckout() {
 </script>
 
 <template>
-    <div class="cart bg-white rounded-lg shadow-md p-6 sticky top-24 grid gap-6 min-w-[280px] mr-8 mt-8">
+    <div class="cart bg-white rounded-lg shadow-md p-6 sticky top-25 grid gap-6 min-w-[280px] mr-8">
         <div class="header text-center pb-4 border-b border-gray-200">
             <div class="title font-bold text-lg mb-2">Shopping Cart</div>
             <div class="item-count text-gray-500 text-sm">{{ itemCount }} items</div>

@@ -1,41 +1,50 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui'
-const categories = await $fetch<any[]>('https://dummyjson.com/products/categories')
 
-const half = Math.ceil(categories.length / 2);
-const firstHalfCategories = categories.slice(0, half);
-const secondHalfCategories = categories.slice(half);
+const categoriesByType = {
+    electronicsAndFashion: ["laptops", "smartphones", "tablets", "mens-shirts", "mens-shoes", "mens-watches", "womens-bags", "womens-dresses", "womens-jewellery", "womens-shoes", "womens-watches"],
+    homeAndBeauty: ["furniture", "home-decoration", "kitchen-accessories", "beauty", "fragrances", "skin-care"],
+    sportsAndOthers: ["sports-accessories", "motorcycle", "groceries", "vehicle", "sunglasses", "mobile-accessories", "tops"]
+};
 
 const items = ref<NavigationMenuItem[]>([
-    // {
-    //     label: 'Home',
-    //     icon: 'i-lucide-home',
-    //     to: '/products',
-    // },
     {
-        label: 'Latest',
-        icon: 'i-lucide-book-open-check',
-        children: firstHalfCategories.map((category) => ({
-            label: category.name,
-            icon: 'i-lucide-book-copy',
-            to: `/category/${category.slug}`,
-        })),
+        label: 'Electronics & Fashion',
+        icon: 'i-lucide-smartphone', // Updated to a more relevant icon
+        children: categories
+            .filter(category => categoriesByType.electronicsAndFashion.includes(category.slug))
+            .map(category => ({
+                label: category.name,
+                icon: category.icon,
+                description: category.description,
+                to: `/category/${category.slug}`
+            }))
     },
     {
-        label: 'Deal',
-        icon: 'i-lucide-book-open-check',
-        children: secondHalfCategories.map((category) => ({
-            label: category.name,
-            icon: 'i-lucide-book-copy',
-            to: `/category/${category.slug}`,
-        })),
+        label: 'Home & Beauty',
+        icon: 'i-lucide-home', // Updated to a more relevant icon
+        children: categories
+            .filter(category => categoriesByType.homeAndBeauty.includes(category.slug))
+            .map(category => ({
+                label: category.name,
+                icon: category.icon,
+                description: category.description,
+                to: `/category/${category.slug}`
+            }))
     },
     {
-        label: 'Favorite',
-        icon: 'i-lucide-folder-heart',
-        to: '/favorites',
-    },
-])
+        label: 'Sports & Others',
+        icon: 'i-lucide-activity', // Updated to a more relevant icon
+        children: categories
+            .filter(category => categoriesByType.sportsAndOthers.includes(category.slug))
+            .map(category => ({
+                label: category.name,
+                icon: category.icon,
+                description: category.description,
+                to: `/category/${category.slug}`
+            }))
+    }
+]);
 
 let search = ref("")
 
@@ -65,9 +74,9 @@ function onSearch(event: any) {
             <UInput v-model="search" icon="i-lucide-search" placeholder="Search..." variant="subtle"
                 class="w-[200px] rounded-full" />
         </form>
-        <ULink to="/account" active-class="font-bold" inactive-class="text-muted" class="flex items-center gap-2">
-            <UIcon name="i-lucide-circle-user-round" />
-            <span>Account</span>
+        <ULink to="/favorites" active-class="font-bold" inactive-class="text-muted" class="flex items-center gap-2">
+            <UIcon name="i-lucide-heart" />
+            <span>Favorite</span>
         </ULink>
         <UButton to="/cart" label="Cart" icon="i-lucide-shopping-cart" class="rounded-full" variant="outline"
             active-color="primary" active-variant="solid" />

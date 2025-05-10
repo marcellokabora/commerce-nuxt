@@ -2,33 +2,13 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
 
-/* :root {
-    --ui-primary: var(--ui-color-primary-500);
-    --ui-secondary: var(--ui-color-secondary-500);
-    --ui-success: var(--ui-color-success-500);
-    --ui-info: var(--ui-color-info-500);
-    --ui-warning: var(--ui-color-warning-500);
-    --ui-error: var(--ui-color-error-500);
-} */
-
 html,
 body {
     height: 100%;
     background-color: rgb(245, 245, 245);
-}
-
-body {
     margin: 0;
     font-family: "Roboto", serif;
     font-optical-sizing: auto;
     font-style: normal;
     font-variation-settings: "wdth" 100;
-}
-
-.nodata {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 80vh;
-    font-size: 2em;
 }
