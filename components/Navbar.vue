@@ -74,9 +74,9 @@ function onSearch(event: any) {
             <UInput v-model="search" icon="i-lucide-search" placeholder="Search..." variant="subtle"
                 class="w-[200px] rounded-full" />
         </form>
-        <ULink to="/favorites" active-class="font-bold" inactive-class="text-muted" class="flex items-center gap-2">
-            <UIcon name="i-lucide-heart" />
-            <span>Favorite</span>
+        <ULink to="/favorites" class="flex items-center gap-2">
+            <UIcon name="i-lucide-heart" color="errror" />
+            <!-- <span>Favorite</span> -->
         </ULink>
         <UButton to="/cart" label="Cart" icon="i-lucide-shopping-cart" class="rounded-full" variant="outline"
             active-color="primary" active-variant="solid" />

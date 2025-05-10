@@ -8,13 +8,13 @@ export const categories = [
     {
         slug: "fragrances",
         name: "Fragrances",
-        icon: "i-lucide-bottle",
+        icon: "i-lucide-milk",
         description: "Discover captivating fragrances for every occasion."
     },
     {
         slug: "furniture",
         name: "Furniture",
-        icon: "i-lucide-chair",
+        icon: "i-lucide-armchair",
         description: "Find stylish and comfortable furniture for your home."
     },
     {
@@ -50,7 +50,7 @@ export const categories = [
     {
         slug: "mens-shoes",
         name: "Mens Shoes",
-        icon: "i-lucide-shoe",
+        icon: "i-lucide-footprints",
         description: "Durable and trendy shoes for men."
     },
     {
@@ -68,7 +68,7 @@ export const categories = [
     {
         slug: "motorcycle",
         name: "Motorcycle",
-        icon: "i-lucide-motorbike",
+        icon: "i-lucide-bike",
         description: "Gear up with our motorcycle essentials."
     },
     {
@@ -86,13 +86,13 @@ export const categories = [
     {
         slug: "sports-accessories",
         name: "Sports Accessories",
-        icon: "i-lucide-football",
+        icon: "i-lucide-volleyball",
         description: "Gear up for your favorite sports activities."
     },
     {
         slug: "sunglasses",
         name: "Sunglasses",
-        icon: "i-lucide-sunglasses",
+        icon: "i-lucide-glasses",
         description: "Protect your eyes with stylish sunglasses."
     },
     {
@@ -104,7 +104,7 @@ export const categories = [
     {
         slug: "tops",
         name: "Tops",
-        icon: "i-lucide-tshirt",
+        icon: "i-lucide-shirt",
         description: "Trendy tops for every occasion."
     },
     {
@@ -116,13 +116,13 @@ export const categories = [
     {
         slug: "womens-bags",
         name: "Womens Bags",
-        icon: "i-lucide-bag",
+        icon: "i-lucide-shopping-bag",
         description: "Chic and functional bags for women."
     },
     {
         slug: "womens-dresses",
         name: "Womens Dresses",
-        icon: "i-lucide-dress",
+        icon: "i-lucide-book-user",
         description: "Elegant dresses for every occasion."
     },
     {
@@ -134,7 +134,7 @@ export const categories = [
     {
         slug: "womens-shoes",
         name: "Womens Shoes",
-        icon: "i-lucide-heel",
+        icon: "i-lucide-footprints",
         description: "Stylish and comfortable shoes for women."
     },
     {

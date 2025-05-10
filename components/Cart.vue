@@ -32,29 +32,28 @@ async function handleCheckout() {
 </script>
 
 <template>
-    <div class="cart bg-white rounded-lg shadow-md p-6 sticky top-25 grid gap-6 min-w-[280px] mr-8">
-        <div class="header text-center pb-4 border-b border-gray-200">
-            <div class="title font-bold text-lg mb-2">Shopping Cart</div>
-            <div class="item-count text-gray-500 text-sm">{{ itemCount }} items</div>
+    <div class="bg-white rounded-lg shadow-md p-6 sticky top-25 grid gap-6">
+        <div class="text-center pb-4 border-b border-gray-200">
+            <div class="font-bold text-lg mb-2">Shopping Cart</div>
+            <div class="text-gray-500 text-sm">{{ itemCount }} items</div>
         </div>
 
-        <div class="price-details grid gap-3">
-            <div class="price-row flex justify-between items-center py-1">
+        <div class="grid gap-3">
+            <div class="flex justify-between items-center py-1">
                 <span>Subtotal</span>
                 <span>{{ subtotal.toFixed(2) }} €</span>
             </div>
-            <div class="price-row discount text-green-500 flex justify-between items-center py-1">
+            <div class="text-green-500 flex gap-2 justify-between items-center py-1">
                 <span>Discount (20%)</span>
                 <span>-{{ discount.toFixed(2) }} €</span>
             </div>
-            <div
-                class="price-row total font-bold text-lg flex justify-between items-center pt-3 border-t border-gray-200">
+            <div class="font-bold text-lg flex justify-between items-center pt-3 border-t border-gray-200">
                 <span>Total</span>
                 <span>{{ total.toFixed(2) }} €</span>
             </div>
         </div>
 
-        <div class="actions grid gap-3">
+        <div class="grid gap-3">
             <UButton color="error" variant="soft" icon="i-lucide-trash-2" @click="cart.clear()"
                 :disabled="products.length === 0">
                 Clear Cart
