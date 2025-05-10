@@ -63,72 +63,31 @@ watch(scrollY, handleScroll)
 
 <template>
     <div>
-        <!-- Initial loading progress -->
-        <div v-if="status === 'pending' && allProducts.length === 0" class="initial-loading">
-            <div class="progress-container">
+        <div v-if="status === 'pending' && allProducts.length === 0"
+            class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
+            <div class="flex flex-col items-center w-48 gap-2">
                 <UProgress :value="100" indeterminate size="xs" />
-                <p class="mt-2 text-sm">Loading products...</p>
+                <p class="mt-2 text-sm text-gray-200">Loading products...</p>
             </div>
         </div>
 
-        <!-- Products list -->
         <div v-if="allProducts.length > 0">
             <Products :products="allProducts" />
         </div>
 
-        <!-- Scroll loading progress -->
-        <div v-if="status === 'pending' && allProducts.length > 0" class="scroll-loading">
-            <div class="progress-container">
+        <div v-if="status === 'pending' && allProducts.length > 0" class="flex items-center justify-center p-4">
+            <div class="flex flex-col items-center w-48 gap-2">
                 <UProgress :value="100" indeterminate size="xs" />
-                <p class="mt-2 text-sm">Loading</p>
+                <p class="mt-2 text-sm text-gray-200">Loading</p>
             </div>
         </div>
 
-        <div v-if="!hasMore && allProducts.length" class="end-message">
+        <div v-if="!hasMore && allProducts.length" class="text-center p-4">
             <UAlert title="End of products" description="No more products to load" color="neutral" />
         </div>
 
-        <div v-if="!status && allProducts.length === 0" class="nodata">
+        <div v-if="!status && allProducts.length === 0" class="text-center p-4">
             <UAlert title="No products" description="No products available" color="neutral" />
         </div>
     </div>
 </template>
-
-<style scoped>
-.initial-loading {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 100;
-}
-
-.scroll-loading {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-}
-
-.progress-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 200px;
-    gap: 0.5rem;
-}
-
-.progress-container p {
-    color: #f3f4f6;
-}
-
-.end-message,
-.nodata {
-    text-align: center;
-    padding: 1rem;
-}
-
-:deep(.u-alert) {
-    color: #f3f4f6;
-}
-</style>

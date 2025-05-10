@@ -15,18 +15,9 @@ const filteredProducts = computed(() => {
 </script>
 
 <template>
-    <div class="products">
+    <div class="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">
         <div v-for="product of filteredProducts" :key="product.id">
             <Card :product="product" />
         </div>
     </div>
 </template>
-
-<style scoped>
-.products {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1em;
-    padding: 2em;
-}
-</style>

@@ -8,7 +8,7 @@ const products = computed(() => cart.products.value)
 </script>
 
 <template>
-    <section>
+    <div class="relative grid grid-cols-[1fr_auto]">
         <div>
             <Products v-if="products[0]" :products="products" />
             <div v-else class="nodata">No products in cart</div>
@@ -16,13 +16,5 @@ const products = computed(() => cart.products.value)
         <div>
             <Cart />
         </div>
-    </section>
+    </div>
 </template>
-
-<style scoped>
-section {
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr auto;
-}
-</style>
