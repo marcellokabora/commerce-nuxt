@@ -6,7 +6,7 @@ const { product } = defineProps<{ product: Product }>()
 let visible = ref(true)
 const path: string = useRoute().name?.toString()!
 const isCart = computed<boolean>(() => path === "cart")
-const isFavo = computed<boolean>(() => path === "favorites")
+const isFavo = computed<boolean>(() => path === "wishlist")
 
 let times = ref(product.times || 1)
 
@@ -64,17 +64,15 @@ function onTimes(value: number) {
         </div>
         <div class="actions absolute top-4 right-4">
             <div v-if="isCart || isFavo">
-                <UButton icon="i-lucide-trash" color="error" class="rounded-full text-xl p-2 cursor-pointer"
-                    @click="onRemove" />
+                <UButton icon="i-lucide-trash" color="neutral" variant="outline"
+                    class="rounded-full text-xl p-2 cursor-pointer" @click="onRemove" />
             </div>
             <div v-else class="grid gap-4">
-                <UButton icon="i-lucide-heart" :color="product.favorite ? 'error' : 'neutral'"
-                    :variant="product.favorite ? 'solid' : 'outline'" class="rounded-full text-xl p-2 cursor-pointer"
-                    @click="onFavorite(product)" />
+                <UButton icon="i-lucide-heart" :color="product.favorite ? 'error' : 'neutral'" variant="outline"
+                    class="rounded-full text-xl p-2 cursor-pointer" @click="onFavorite(product)" />
                 <UModal class="sm:flex hidden">
                     <UButton icon="i-lucide-eye" color="neutral" variant="outline"
                         class="rounded-full text-xl p-2 cursor-pointer" />
-
                     <template #content>
                         <Preview :product="product" />
                     </template>
