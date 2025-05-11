@@ -1,3 +1,7 @@
+<script setup lang="ts">
+navigateTo('/products');
+</script>
+
 <template>
     <div class="fixed inset-0">
         <div class="w-full h-full bg-cover bg-center bg-no-repeat transform scale-110 blur-lg"

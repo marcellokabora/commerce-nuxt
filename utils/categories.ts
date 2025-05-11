@@ -189,3 +189,34 @@ export const categoriesMenu = [
             }))
     }
 ]
+
+export const menuMobile = [
+    ...categoriesMenu,
+    ...[
+        {
+            label: 'Products',
+            icon: 'lucide:menu',
+            to: '/products'
+        },
+        {
+            label: 'Search',
+            icon: 'lucide:search',
+            to: '/search'
+        },
+        {
+            label: 'Wishlist',
+            icon: 'lucide:heart',
+            to: '/wishlist'
+        },
+        {
+            label: 'Cart',
+            icon: 'lucide:shopping-cart',
+            to: '/cart'
+        },
+        {
+            label: 'Profile',
+            icon: 'lucide:user',
+            to: '/profile'
+        }
+    ]
+]

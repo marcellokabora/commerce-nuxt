@@ -2,7 +2,7 @@
   <UApp>
     <UContainer>
       <Navbar />
-      <main class="sm:px-4">
+      <main class="sm:px-4 pb-4">
         <slot />
       </main>
     </UContainer>
