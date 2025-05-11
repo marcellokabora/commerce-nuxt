@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { USlideover } from '#components';
 import type { NavigationMenuItem } from '@nuxt/ui'
 
 const categoriesByType = {
@@ -68,17 +69,27 @@ function onSearch(event: any) {
                 <NuxtImg src="/nuxt.svg" width="50" />
                 <h1 class="text-xl font-bold text-nowrap">Nuxt Store</h1>
             </ULink>
-            <UNavigationMenu :items="items" variant="link" class="w-full gap-4" />
+            <UNavigationMenu :items="items" variant="link" class="w-full gap-4 hidden lg:block" />
         </div>
-        <form @submit="onSearch">
-            <UInput v-model="search" icon="i-lucide-search" placeholder="Search..." variant="subtle"
-                class="w-[200px] rounded-full" />
-        </form>
-        <ULink to="/favorites" class="flex items-center gap-2">
-            <UIcon name="i-lucide-heart" color="errror" />
-            <!-- <span>Favorite</span> -->
-        </ULink>
-        <UButton to="/cart" label="Cart" icon="i-lucide-shopping-cart" class="rounded-full" variant="outline"
-            active-color="primary" active-variant="solid" />
+        <div class="items-center gap-10 hidden lg:flex">
+            <form @submit="onSearch">
+                <UInput v-model="search" icon="i-lucide-search" placeholder="Search..." variant="subtle"
+                    class="w-[200px] rounded-full" />
+            </form>
+            <ULink to="/favorites" class="flex items-center gap-2">
+                <UIcon name="i-lucide-heart" color="errror" />
+                <!-- <span>Favorite</span> -->
+            </ULink>
+            <UButton to="/cart" label="Cart" icon="i-lucide-shopping-cart" class="rounded-full" variant="outline"
+                active-color="primary" active-variant="solid" />
+        </div>
+        <USlideover>
+            <UButton label="Menu" icon="i-lucide-menu " color="neutral" variant="subtle" class="lg:hidden" />
+            <template #content>
+                <Placeholder class="h-full m-4" />
+            </template>
+        </USlideover>
+
+
     </div>
 </template>
