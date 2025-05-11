@@ -150,3 +150,42 @@ export const categoriesByType = {
     homeAndBeauty: ["furniture", "home-decoration", "kitchen-accessories", "beauty", "fragrances", "skin-care"],
     sportsAndOthers: ["sports-accessories", "motorcycle", "groceries", "vehicle", "sunglasses", "mobile-accessories", "tops"]
 };
+
+export const categoriesMenu = [
+    {
+        label: 'Electronics & Fashion',
+        icon: 'lucide:tablet-smartphone',
+        children: categories
+            .filter(category => categoriesByType.electronicsAndFashion.includes(category.slug))
+            .map(category => ({
+                label: category.name,
+                icon: category.icon,
+                description: category.description,
+                to: `/category/${category.slug}`
+            }))
+    },
+    {
+        label: 'Home & Beauty',
+        icon: 'lucide:house-plug',
+        children: categories
+            .filter(category => categoriesByType.homeAndBeauty.includes(category.slug))
+            .map(category => ({
+                label: category.name,
+                icon: category.icon,
+                description: category.description,
+                to: `/category/${category.slug}`
+            }))
+    },
+    {
+        label: 'Sports & Others',
+        icon: 'i-lucide-activity',
+        children: categories
+            .filter(category => categoriesByType.sportsAndOthers.includes(category.slug))
+            .map(category => ({
+                label: category.name,
+                icon: category.icon,
+                description: category.description,
+                to: `/category/${category.slug}`
+            }))
+    }
+]

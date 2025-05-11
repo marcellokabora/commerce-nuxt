@@ -5,7 +5,6 @@ import { computed } from 'vue';
 const props = defineProps<{ products: Product[] }>()
 const favorites = favoriteCookie().products
 
-// Create a computed property for filtered products
 const filteredProducts = computed(() => {
     return props.products.map(product => ({
         ...product,
