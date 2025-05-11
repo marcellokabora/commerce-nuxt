@@ -1,16 +1,11 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui'
-
-const categoriesByType = {
-    electronicsAndFashion: ["laptops", "smartphones", "tablets", "mens-shirts", "mens-shoes", "mens-watches", "womens-bags", "womens-dresses", "womens-jewellery", "womens-shoes", "womens-watches"],
-    homeAndBeauty: ["furniture", "home-decoration", "kitchen-accessories", "beauty", "fragrances", "skin-care"],
-    sportsAndOthers: ["sports-accessories", "motorcycle", "groceries", "vehicle", "sunglasses", "mobile-accessories", "tops"]
-};
+import { cartCookie } from '~/composables/cookies';
 
 const items = ref<NavigationMenuItem[]>([
     {
         label: 'Electronics & Fashion',
-        icon: 'i-lucide-smartphone', // Updated to a more relevant icon
+        icon: 'i-lucide-smartphone',
         children: categories
             .filter(category => categoriesByType.electronicsAndFashion.includes(category.slug))
             .map(category => ({
@@ -22,7 +17,7 @@ const items = ref<NavigationMenuItem[]>([
     },
     {
         label: 'Home & Beauty',
-        icon: 'i-lucide-home', // Updated to a more relevant icon
+        icon: 'i-lucide-home',
         children: categories
             .filter(category => categoriesByType.homeAndBeauty.includes(category.slug))
             .map(category => ({
@@ -34,7 +29,7 @@ const items = ref<NavigationMenuItem[]>([
     },
     {
         label: 'Sports & Others',
-        icon: 'i-lucide-activity', // Updated to a more relevant icon
+        icon: 'i-lucide-activity',
         children: categories
             .filter(category => categoriesByType.sportsAndOthers.includes(category.slug))
             .map(category => ({
@@ -57,6 +52,7 @@ function onSearch(event: any) {
     }
 }
 
+const { products } = cartCookie();
 
 </script>
 
@@ -66,7 +62,7 @@ function onSearch(event: any) {
         <div class="w-full flex items-center gap-10">
             <ULink to="/" class="flex items-center gap-2">
                 <NuxtImg src="/nuxt.svg" width="50" />
-                <h1 class="text-xl font-bold text-nowrap">Nuxt Store</h1>
+                <h1 class="text-xl font-bold text-nowrap">Ecommerce</h1>
             </ULink>
             <UNavigationMenu :items="items" variant="link" class="w-full gap-4" />
         </div>
@@ -78,7 +74,12 @@ function onSearch(event: any) {
             <UIcon name="i-lucide-heart" color="errror" />
             <!-- <span>Favorite</span> -->
         </ULink>
-        <UButton to="/cart" label="Cart" icon="i-lucide-shopping-cart" class="rounded-full" variant="outline"
-            active-color="primary" active-variant="solid" />
+        <div class="relative">
+            <UButton to="/cart" label="Cart" icon="i-lucide-shopping-cart" class="rounded-full" variant="outline"
+                active-color="primary" active-variant="solid">
+            </UButton>
+            <UBadge v-if="products.length > 0" :label="products.length" class="absolute -top-2 -right-2 rounded-full"
+                variant="solid" size="sm" />
+        </div>
     </div>
 </template>
