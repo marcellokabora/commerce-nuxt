@@ -194,11 +194,6 @@ export const menuMobile = [
     ...categoriesMenu,
     ...[
         {
-            label: 'Products',
-            icon: 'lucide:menu',
-            to: '/products'
-        },
-        {
             label: 'Search',
             icon: 'lucide:search',
             to: '/search'

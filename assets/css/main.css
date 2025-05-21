@@ -12,3 +12,7 @@ body {
     font-style: normal;
     font-variation-settings: "wdth" 100;
 }
+
+@theme {
+    --color-primary: var(--color-green-500);
+}
